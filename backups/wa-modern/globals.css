@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdfbf7;
+  /* Washi Paper */
+  --foreground: #1a202c;
+  /* Sumi Ink */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Wa-Modern Brand Colors */
+  --color-moon: #4F46E5;
+  /* Indigo-600 (Deep Indigo) */
+  --color-cat: #64748B;
+  /* Slate-500 (Muted Blue-Grey) */
+  --color-accent: #0D9488;
+  /* Teal-600 (Kimono Green) */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    /* Midnight Blue */
+    --foreground: #f1f5f9;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

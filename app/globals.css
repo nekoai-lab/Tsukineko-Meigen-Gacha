@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F9F8F4;
+  /* Off-white Washi color */
+  --foreground: #475569;
+  /* Slate Navy */
+  --color-gold: #C5A059;
+  /* Elegant Gold */
+  --color-gold-light: #E5D5B0;
+  --color-indigo-deep: #1E293B;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-indigo-deep: var(--color-indigo-deep);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Noto Serif JP", serif;
+  /* Enforce Serif for the whole app */
+}
+
+/* Washi Paper Texture */
+.bg-washi {
+  position: relative;
+}
+
+.bg-washi::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Seigaiha (Blue Ocean Waves) Pattern */
+.bg-seigaiha {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='50' viewBox='0 0 100 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 A50 50 0 0 1 100 50 A50 50 0 0 1 200 50 A50 50 0 0 1 300 50 A50 50 0 0 1 400 50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.3'/%3E%3Cpath d='M0 50 A40 40 0 0 1 80 50 M100 50 A40 40 0 0 1 180 50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.3'/%3E%3Cpath d='M0 50 A30 30 0 0 1 60 50 M100 50 A30 30 0 0 1 160 50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.3'/%3E%3Cpath d='M0 50 A20 20 0 0 1 40 50 M100 50 A20 20 0 0 1 140 50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 60px 30px;
+}
+
+/* Asanoha (Hemp Leaf) Pattern */
+.bg-asanoha {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z' fill='none' stroke='%23475569' stroke-width='1' stroke-opacity='0.1'/%3E%3Cpath d='M50 0 L50 100 M0 25 L100 75 M100 25 L0 75' fill='none' stroke='%23475569' stroke-width='1' stroke-opacity='0.1'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* Shippou (Seven Treasures) Pattern */
+.bg-shippou {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='0' cy='50' r='50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.2'/%3E%3Ccircle cx='100' cy='50' r='50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.2'/%3E%3Ccircle cx='50' cy='0' r='50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.2'/%3E%3Ccircle cx='50' cy='100' r='50' fill='none' stroke='%23C5A059' stroke-width='2' stroke-opacity='0.2'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
 }

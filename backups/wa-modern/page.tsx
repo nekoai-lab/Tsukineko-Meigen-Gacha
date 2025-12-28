@@ -7,7 +7,6 @@ import QuoteCard from "@/components/QuoteCard";
 import EmotionAnalysisComponent from "@/components/EmotionAnalysis";
 import AlternativeQuotes from "@/components/AlternativeQuotes";
 import ShareButton from "@/components/ShareButton";
-import { WelcomeMessage } from "@/components/WelcomeMessage";
 import { Moon } from "lucide-react";
 
 export default function Home() {
@@ -48,13 +47,11 @@ export default function Home() {
         // I'll fetch it here and update the data.
 
         let coverUrl = null;
-        let productUrl = null;
         if (data.search_keyword) {
           try {
             const coverRes = await fetch(`/api/book-cover?keyword=${encodeURIComponent(data.search_keyword)}`);
             const coverJson = await coverRes.json();
             coverUrl = coverJson.url;
-            productUrl = coverJson.productUrl;
           } catch (e) {
             console.error("Cover fetch failed", e);
           }
@@ -62,8 +59,7 @@ export default function Home() {
 
         setQuoteData({
           ...data,
-          book_cover_url: coverUrl || data.book_cover_url, // prioritize fetched cover
-          book_product_url: productUrl || undefined
+          book_cover_url: coverUrl || data.book_cover_url // prioritize fetched cover
         });
       }
     } catch (e) {
@@ -80,63 +76,56 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-washi relative overflow-hidden pb-20 selection:bg-[var(--color-gold)] selection:text-white">
+    <main className="min-h-screen bg-slate-50 relative overflow-hidden font-sans pb-20">
+      {/* Background Decoration */}
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 -z-10 rounded-b-[3rem]" />
 
-      {/* Decorative Background Patterns */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-seigaiha opacity-60 -z-10 rounded-bl-[100px]" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-shippou opacity-40 -z-10 rounded-tr-[100px]" />
-      <div className="absolute top-20 left-10 w-32 h-32 border border-[var(--color-gold)] opacity-20 rounded-full -z-10 animate-float" />
-
+      {/* Header */}
       {/* Header with Mascot */}
       <header className="pt-8 pb-6 text-center px-4 relative z-10">
-        <div className="flex flex-col items-center justify-center gap-4 mb-4 animate-fade-in-up">
-          {/* Mascot Image with Gold Rim */}
-          <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full p-1.5 bg-gradient-to-b from-[var(--color-gold-light)] to-[var(--color-gold)] shadow-lg">
-            <div className="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white relative">
-              <img
-                src="/mascot.jpg"
-                alt="Moon Cat Mascot"
-                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-out"
-              />
-            </div>
+        <div className="flex flex-col items-center justify-center gap-4 mb-4 animate-in fade-in slide-in-from-top duration-700">
+          {/* Mascot Image */}
+          <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white">
+            <img
+              src="/mascot.jpg"
+              alt="Moon Cat Mascot"
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-center gap-2">
-              <Moon className="w-4 h-4 text-[var(--color-gold)] fill-[var(--color-gold)]" />
-              <span className="text-xs font-bold tracking-[0.3em] text-[var(--color-gold)] uppercase">Tsukineko</span>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-widest text-[var(--color-indigo-deep)] drop-shadow-sm">
-              月ねこ名言帖
-            </h1>
+          <div className="flex items-center gap-2">
+            <Moon className="w-6 h-6 text-moon fill-moon" />
+            <span className="text-3xl font-extrabold tracking-widest text-[#1a202c] drop-shadow-sm font-serif">
+              月ねこアニメ名言
+            </span>
           </div>
         </div>
         <p className="text-slate-500 text-sm font-medium tracking-wide">
-          気の利いたことは言えませんが、最高の物語なら知っています。
+          気の利いたことは言えませんが、最高のアニメなら知っています。
         </p>
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 z-10 relative max-w-md">
+      <div className="container mx-auto px-4 z-10 relative max-w-lg">
         {!quoteData ? (
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            {/* Dynamic Welcome Message */}
-            <WelcomeMessage />
-
-            <div className="mt-6">
-              <EmotionForm onSubmit={fetchQuote} isLoading={loading} />
+          <div className="animate-in fade-in zoom-in duration-500">
+            {/* Speech Bubble Context */}
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8 relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-t border-l border-slate-100 transform rotate-45"></div>
+              <p className="text-center text-slate-600 leading-relaxed font-serif">
+                「ねぇ、今の気分はどう？<br />
+                話してくれたら、君にぴったりの言葉を探してくるね。」
+              </p>
             </div>
 
-            <div className="mt-12 text-center text-[var(--color-gold)] text-[10px] tracking-[0.2em] opacity-80">
-              <div className="flex flex-col items-center gap-2 opacity-80">
-                <p className="text-[12px] font-bold tracking-[0.2em] text-[var(--color-gold)]">TSUKINEKO AI</p>
-                <div className="w-px h-3 bg-[var(--color-gold)] opacity-50"></div>
-                <p className="text-[10px] tracking-[0.1em] text-slate-400">Powered by Gemini</p>
-              </div>
+            <EmotionForm onSubmit={fetchQuote} isLoading={loading} />
+
+            <div className="mt-12 text-center text-slate-400 text-xs tracking-wider">
+              <p>Powered by Gemini AI</p>
             </div>
           </div>
         ) : (
-          <div className="space-y-8 animate-fade-in-up">
+          <div className="space-y-6">
             <QuoteCard data={quoteData} />
 
             <div className="max-w-2xl mx-auto space-y-6">
