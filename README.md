@@ -111,7 +111,7 @@ sequenceDiagram
 | **Language** | **TypeScript** | 5.x | Static Typing, Interfaces |
 | **UI Library** | **React** | 19.x | Component Architecture |
 | **Styling** | **Tailwind CSS** | 4.x | Utility-first CSS, Custom Animations |
-| **AI Model** | **Google Gemini** | 1.5-flash | Natural Language Processing |
+| **AI Model** | **Google Gemini** | 2.5-flash | Natural Language Processing |
 | **Icons** | **Lucide React** | 0.562 | SVG Icons |
 | **Font** | **Google Fonts** | Noto Serif JP, Zen Kurenaido | Typography |
 
