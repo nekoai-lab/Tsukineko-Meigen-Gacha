@@ -40,16 +40,16 @@
 
 ```mermaid
 graph TD
-    Client[Client (Browser)]
+    Client["Client (Browser)"]
     subgraph "Vercel / Next.js Infrastructure"
-        Page[React Server/Client Components]
-        RouteGen[API Route: /api/generate]
-        RouteCover[API Route: /api/book-cover]
+        Page["React Server/Client Components"]
+        RouteGen["API Route: /api/generate"]
+        RouteCover["API Route: /api/book-cover"]
     end
     
     subgraph "External Services"
-        Gemini[Google Gemini API]
-        Rakuten[Rakuten Books API (Optional)]
+        Gemini["Google Gemini API"]
+        Rakuten["Rakuten Books API (Optional)"]
     end
 
     Client -->|1. User Input| Page
